@@ -2,7 +2,7 @@ name: test
 on:
   push:
     branches:
-      - ["main", "init_backend"]
+      - ["main", "feat/init_backend"]
   pull_request:
     branches:
       - main
