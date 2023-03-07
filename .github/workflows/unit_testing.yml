@@ -1,8 +1,9 @@
 name: test
+
 on:
   push:
     branches:
-      - ["main", "feat/init_backend"]
+      - [main, feat/init_backend]
   pull_request:
     branches:
       - main
