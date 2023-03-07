@@ -4,7 +4,11 @@ from .main import app
 client = TestClient(app)
 
 
-def test_hello_world():
+def test_root():
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"message": "Welcome to TLDR application!"}
+
+
+def test_get_summarization():
+    ...
