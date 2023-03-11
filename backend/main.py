@@ -23,5 +23,10 @@ async def root():
 async def get_summarization(
     long_text: str = Body(default="This is just a default.", embed=True)
 ):
-    logging.info(f"long_text: {long_text}")
-    return Summarizer().summarize(long_text=long_text)
+    summarizer = Summarizer()
+    response_from_openai = summarizer.summarize(long_text=long_text)
+    results = {
+        "method": summarizer.purpose,
+        "result": response_from_openai["choices"][0]["text"],
+    }
+    return results
