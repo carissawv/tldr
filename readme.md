@@ -46,3 +46,25 @@ This repository contains code to implement TLDR application using OpenAI API.
 ### Documentation guide
 
 Use [this Google styleguide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings).
+
+### Debugging
+
+For the Python, use `icecream` module instead of debug using
+`logging` and `print`. Example usage:
+
+```python
+from icecream import ic
+
+from icecream import ic
+
+def foo(i):
+    return i + 333
+
+ic(foo(123))
+```
+
+Prints
+
+```bash
+ic| foo(123): 456
+```
