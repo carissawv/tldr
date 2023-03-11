@@ -5,7 +5,7 @@ FastAPI to load it.
 """
 from dotenv import load_dotenv
 from fastapi import FastAPI, Body
-from .src.core.hit import Summarizer
+from src.core.hit import Summarizer
 import logging
 
 logging.basicConfig(level=logging.INFO)
