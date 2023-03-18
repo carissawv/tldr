@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Body
 from src.core.hit import Summarizer
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 load_dotenv()
@@ -23,7 +24,11 @@ async def root():
         to TLDR application!'.
 
     """
-    return {"message": "Welcome to TLDR application!"}
+    return {
+        "message": "Welcome to TLDR application!"
+        + str(os.environ.get("OPENAI_API_KEY"))
+        + "...."
+    }
 
 
 @app.post("/summarize")
@@ -47,10 +52,17 @@ async def get_summarization(
             'result': 'This is the summary of the long text'
         }
     """
-    summarizer = Summarizer()
-    response_from_openai = summarizer.summarize(long_text=long_text)
-    results = {
-        "method": summarizer.purpose,
-        "result": response_from_openai["choices"][0]["text"],
-    }
+    if os.environ.get("OPENAI_API_KEY") != None:
+        summarizer = Summarizer()
+        response_from_openai = summarizer.summarize(long_text=long_text)
+        results = {
+            "method": summarizer.purpose,
+            "result": response_from_openai["choices"][0]["text"],
+        }
+    else:
+        results = {
+            "method": "summarize_default",
+            "result": "response_default",
+        }
+
     return results
