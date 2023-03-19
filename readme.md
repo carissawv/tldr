@@ -55,8 +55,6 @@ For the Python, use `icecream` module instead of debug using
 ```python
 from icecream import ic
 
-from icecream import ic
-
 def foo(i):
     return i + 333
 

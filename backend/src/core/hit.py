@@ -29,7 +29,7 @@ class Summarizer(OpenAIBridge):
         super().__init__()
         self.purpose = "summarize"
 
-    def summarize(self, long_text: str) -> str:
+    def summarize(self, long_text: str) -> dict:
         """Summarizes the long text with using OpenAI API
 
         Args:
