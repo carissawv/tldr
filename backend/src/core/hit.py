@@ -18,6 +18,10 @@ class OpenAIBridge:
         openai.api_key = os.getenv("OPENAI_API_KEY")
         self.purpose: str = "base class"
 
+    @property
+    def is_api_key_provided(self):
+        return os.getenv("OPENAI_API_KEY") not in (None, "")
+
 
 class Summarizer(OpenAIBridge):
     """The OpenAI connector that is used to summarize."""
@@ -39,14 +43,16 @@ class Summarizer(OpenAIBridge):
             Original response from OpenAI, that includes
             choices, created, id, model, object, and usage.
         """
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=f"{long_text}\n\nTl;dr:\n",
-            temperature=0,
-            max_tokens=512,
-            top_p=1.0,
-            frequency_penalty=0.0,
-            presence_penalty=1,
-        )
+        response = {}
+        if self.is_api_key_provided:
+            response = openai.Completion.create(
+                model="text-davinci-003",
+                prompt=f"{long_text}\n\nTl;dr:\n",
+                temperature=0,
+                max_tokens=512,
+                top_p=1.0,
+                frequency_penalty=0.0,
+                presence_penalty=1,
+            )
 
         return response
